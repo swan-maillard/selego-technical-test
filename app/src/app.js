@@ -20,6 +20,7 @@ import api from "./services/api";
 
 import "./index.css";
 import Home from "./scenes/home";
+import Dashboard from "./scenes/dashboard";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -38,7 +39,8 @@ const App = () => {
       }
       setLoading(false);
     }
-    fetchData();
+
+    (async () => await fetchData())();
   }, []);
 
   if (loading) return <Loader />;
@@ -59,6 +61,7 @@ const App = () => {
 
                 <RestrictedRoute path="/account" component={Account} />
                 <RestrictedRoute path="/project" component={Project} />
+                <RestrictedRoute path="/dashboard" component={Dashboard} />
                 <RestrictedRoute path="/" component={Home} />
               </Switch>
             </main>
@@ -69,7 +72,8 @@ const App = () => {
   );
 };
 
-const RestrictedRoute = ({ component: Component, role, ...rest }) => {
+// Remove unused 'role'
+const RestrictedRoute = ({ component: Component, ...rest }) => {
   const user = useSelector((state) => state.Auth.user);
   if (!user) return <Redirect to={{ pathname: "/auth" }} />;
   return <Route {...rest} render={(props) => (user ? <Component {...props} /> : <Redirect to={{ pathname: "/auth" }} />)} />;

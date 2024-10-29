@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { ActivitiesIcon, HomeIcon, PeopleIcon, ProjectsIcon } from "../assets/Icons";
+import { ActivitiesIcon, DashboardIcon, HomeIcon, PeopleIcon, ProjectsIcon } from "../assets/Icons";
 
 const Drawer = () => {
   return <DrawerDesktop />;
@@ -12,6 +12,7 @@ const DrawerDesktop = () => {
       <ul className={`list-none px-3 z-10 border-r border-[#a0a6b124] space-y-2 translate-x-0 duration-200`}>
         <Section title="Général">
           <Link to="/" title="Home" Icon={HomeIcon} />
+          <Link to="/dashboard" title="Dashboard" Icon={DashboardIcon} />
           <Link to="/project" title="Projects" Icon={ProjectsIcon} />
           <Link to="/activity" title="Activities" Icon={ActivitiesIcon} />
           <Link to="/user" title="People" Icon={PeopleIcon} />
