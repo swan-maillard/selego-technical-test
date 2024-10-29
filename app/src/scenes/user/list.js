@@ -5,19 +5,23 @@ import { useHistory } from "react-router-dom";
 import Loader from "../../components/loader";
 import LoadingButton from "../../components/loadingButton";
 import api from "../../services/api";
+import { useSelector } from "react-redux";
 
 const NewList = () => {
   const [users, setUsers] = useState(null);
   const [projects, setProjects] = useState([]);
   const [usersFiltered, setUsersFiltered] = useState(null);
-  const [filter, setFilter] = useState({ status: "active", availability: "", search: "" });
+  const [filter, setFilter] = useState({ status: "active", availability: "", search: "", contract: "" });
+
+  // FIX: Retrieve the current user
+  const user = useSelector((state) => state.Auth.user);
 
   useEffect(() => {
     (async () => {
       const { data } = await api.get("/user");
       setUsers(data);
+      await getProjects();
     })();
-    getProjects();
   }, []);
 
   async function getProjects() {
@@ -32,9 +36,10 @@ const NewList = () => {
         .filter((u) => !filter?.status || u.status === filter?.status)
         .filter((u) => !filter?.contract || u.contract === filter?.contract)
         .filter((u) => !filter?.availability || u.availability === filter?.availability)
-        .filter((u) => !filter?.search || u.name.toLowerCase().includes(filter?.search.toLowerCase())),
+        .filter((u) => !filter?.search || u.name.toLowerCase().includes(filter?.search.toLowerCase()))
+        .map((u) => (u._id === user._id ? user : u)), // FIX: Show the updated data of the current user
     );
-  }, [users, filter]);
+  }, [users, filter, user]);
 
   if (!usersFiltered) return <Loader />;
 
@@ -128,7 +133,8 @@ const Create = () => {
                     <div className="flex justify-between flex-wrap">
                       <div className="w-full md:w-[48%] mt-2">
                         <div className="text-[14px] text-[#212325] font-medium	">Name</div>
-                        <input className="projectsInput text-[14px] font-normal text-[#212325] rounded-[10px]" name="username" value={values.username} onChange={handleChange} />
+                        {/* FIX: Change 'username' to 'name' to fit the data structure */}
+                        <input className="projectsInput text-[14px] font-normal text-[#212325] rounded-[10px]" name="name" value={values.username} onChange={handleChange} />
                       </div>
                       <div className="w-full md:w-[48%] mt-2">
                         <div className="text-[14px] text-[#212325] font-medium	">Email</div>

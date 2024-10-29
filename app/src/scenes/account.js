@@ -64,7 +64,8 @@ export default () => {
               <LoadingButton
                 className="ml-[10px] bg-[#17a2b8] hover:bg-[#138496] text-[1rem] text-[#fff] py-[0.375rem] px-[0.75rem] rounded-[0.25rem]"
                 loading={isLoading}
-                onClick={handleSubmit}>
+                onClick={handleSubmit}
+              >
                 Update
               </LoadingButton>
             </div>

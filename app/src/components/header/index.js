@@ -43,7 +43,8 @@ const Header = () => {
           <select
             value={user.availability}
             onChange={(e) => handleAvailability(e.target.value)}
-            className="w-[180px] bg-[#FFFFFF] text-[13px] text-[#212325]  font-normal py-[10px] px-[14px] rounded-[10px] border-r-[16px] border-[transparent] cursor-pointer shadow-sm">
+            className="w-[180px] bg-[#FFFFFF] text-[13px] text-[#212325]  font-normal py-[10px] px-[14px] rounded-[10px] border-r-[16px] border-[transparent] cursor-pointer shadow-sm"
+          >
             <option value="available">Available</option>
             <option value="not available">Not Available</option>
           </select>
@@ -53,7 +54,8 @@ const Header = () => {
         <div
           className={`w-screen md:w-[150px] h-screen md:h-fit rounded overflow-hidden z-0 bg-[#fff] opacity-[${menuStyling.menuOpacity}] 
           ${menuStyling.menuVisibility} translate-x-[${menuStyling.menuTransition}] transition duration-100 ease-in fixed top-0 right-0  md:absolute md:top-[calc(100%_+_10px)] z-50 md:z-10 shadow-menuShadow `}
-          open={open}>
+          open={open}
+        >
           <div className="text-3xl mt-3 cursor-pointer	text-[#666] block w-[45px] py-0	px-3.5	ml-auto	md:hidden " onClick={() => setOpen(false)}>
             &times;
           </div>
@@ -64,7 +66,8 @@ const Header = () => {
           </div>
           <div
             className="text-[15px] font-[Arial] p-[10px] text-left text-[#888888] cursor-pointer border-l-4 border-[#ffffff] hover:border-red-400 hover:bg-[#d3bfc731] hover:text-[#333]"
-            onClick={logout}>
+            onClick={logout}
+          >
             <Link style={{ textDecoration: "none" }} className="text-inherit hover:text-[#333]" to="#">
               Logout
             </Link>

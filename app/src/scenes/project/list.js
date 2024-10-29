@@ -33,9 +33,15 @@ const ProjectList = () => {
     setActiveProjects(p);
   };
 
+  // FIX: Function to add a project to the list
+  const addProject = (project) => {
+    const newProjects = [project, ...projects];
+    setProjects(newProjects);
+  };
+
   return (
     <div className="w-full p-2 md:!px-8">
-      <Create onChangeSearch={handleSearch} />
+      <Create onChangeSearch={handleSearch} onCreateProject={addProject} />
       <div className="py-3">
         {activeProjects.map((hit) => {
           return (
@@ -92,7 +98,7 @@ const Budget = ({ project }) => {
   return <ProgressBar percentage={width} max={budget_max_monthly} value={total} />;
 };
 
-const Create = ({ onChangeSearch }) => {
+const Create = ({ onChangeSearch, onCreateProject }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -145,6 +151,8 @@ const Create = ({ onChangeSearch }) => {
                   const res = await api.post("/project", values);
                   if (!res.ok) throw res;
                   toast.success("Created!");
+                  // FIX: add the new project to the list
+                  onCreateProject(res.data);
                   setOpen(false);
                 } catch (e) {
                   console.log(e);

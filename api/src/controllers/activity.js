@@ -30,6 +30,11 @@ router.get("/", passport.authenticate("user", { session: false }), async (req, r
       query.date = { ...query.date, $lte: date };
     }
 
+    // FIX: Add the project filter rule if specified in the project
+    if (req.query.project) {
+      query.projectId = req.query.project;
+    }
+
     const data = await ActivityObject.find({ ...query, organisation: req.user.organisation }).sort("-created_at");
     return res.status(200).send({ ok: true, data });
   } catch (error) {

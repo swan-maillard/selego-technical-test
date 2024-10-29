@@ -32,7 +32,8 @@ export default () => {
             toast.error("Wrong login", e.code);
           }
           actions.setSubmitting(false);
-        }}>
+        }}
+      >
         {({ values, errors, isSubmitting, handleChange, handleSubmit }) => {
           return (
             <form onSubmit={handleSubmit}>
@@ -95,7 +96,8 @@ export default () => {
                 className="font-[Helvetica] w-[220px] bg-[#007bff] hover:bg-[#0069d9] text-[#fff] rounded-[30px] m-auto block text-[16px] p-[8px] min-h-[42px] "
                 loading={isSubmitting}
                 type="submit"
-                color="primary">
+                color="primary"
+              >
                 Signup
               </LoadingButton>
             </form>

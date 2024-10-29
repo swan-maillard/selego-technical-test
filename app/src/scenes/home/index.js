@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
+import { useSelector } from "react-redux";
 
 const Home = () => {
-  const [availableUsers, setAvailableUsers] = useState();
+  const [availableUsers, setAvailableUsers] = useState(null);
+
+  // FIX: Retrieve the current user
+  const user = useSelector((state) => state.Auth.user);
 
   async function getUser() {
     const { data } = await api.get("/user/available");
     setAvailableUsers(data);
   }
+
   useEffect(() => {
-    getUser();
-  }, []);
+    (async () => await getUser())();
+  }, [user]); // FIX: Refresh users when the current user changes its availability
 
   return (
     <div className="px-2 md:!px-8 flex flex-col md:flex-row gap-5 mt-5">

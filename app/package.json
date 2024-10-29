@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "webpack serve --port 8082 --mode development --config webpack.dev.config.js --progress --liveReload --open --hot --inline",
     "start": "npm run build && node server/index.js",
-    "build": "webpack"
+    "build": "webpack",
+    "format": "prettier --loglevel warn --write \"./**/*.{jsx,js}\""
   },
   "devDependencies": {
     "@babel/cli": "7.16.0",

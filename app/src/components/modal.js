@@ -18,7 +18,8 @@ export default function Modal({ isOpen, children, onClose, className }) {
             enterTo="opacity-100"
             leave="ease-in duration-200"
             leaveFrom="opacity-100"
-            leaveTo="opacity-0">
+            leaveTo="opacity-0"
+          >
             <Dialog.Overlay className="fixed inset-0" />
           </Transition.Child>
           <Transition.Child
@@ -28,7 +29,8 @@ export default function Modal({ isOpen, children, onClose, className }) {
             enterTo="opacity-100 scale-100"
             leave="ease-in duration-200"
             leaveFrom="opacity-100 scale-100"
-            leaveTo="opacity-0 scale-95">
+            leaveTo="opacity-0 scale-95"
+          >
             <div className={`z-10 bg-white rounded-lg absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-screen overflow-y-auto ${className}`}>
               <div className="absolute cursor-pointer top-5 right-5">
                 <HiX className="text-xl text-gray-500 transition-colors hover:text-red-500" onClick={onClose} />
